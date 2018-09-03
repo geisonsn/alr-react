@@ -8,16 +8,19 @@ class App extends Component {
     super();
     this.state = {lista: []}
   }
-  componentWillMount() {
+  componentDidMount() {
+    console.log('componentDidMount');
     $.ajax({
       url: 'http://localhost:8080/api/autores',
       dataType: 'json',
       success: function(response) {
+        console.log('sending a request');
         this.setState({lista:response});
       }.bind(this)
     })
   }
   render() {
+    console.log('render');
     return (
 <div id="layout">
     
