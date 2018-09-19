@@ -36,8 +36,8 @@ class App extends Component {
       type: 'post',
       data: JSON.stringify({nome: this.state.nome, email: this.state.email, senha: this.state.senha}),
       success: function(response) {
-        console.log('adicionado com sucesso');
-      },
+        this.setState({lista: response});
+      }.bind(this),
       error: function(response) {
 
       }
