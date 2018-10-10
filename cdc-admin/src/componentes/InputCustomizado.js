@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class InputCustomiozado extends Component {
+export default class InputCustomizado extends Component {
 
     render() {
         return (
