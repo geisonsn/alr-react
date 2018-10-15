@@ -10,7 +10,6 @@ class FormularioAutor extends Component {
     constructor() {
         super();
         this.state = {
-          lista: [],
           nome: '',
           email: '', 
           senha: ''
