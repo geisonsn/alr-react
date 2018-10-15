@@ -1,5 +1,6 @@
 import React from 'react';
 import InputCustomizado from './componentes/InputCustomizado';
+import $ from 'jquery';
 
 class Formulario extends React.Component {
     constructor() {
@@ -54,7 +55,49 @@ class Formulario extends React.Component {
     }
 }
 
+function TabelaLivros(props) {
+    return (
+        <div>            
+            <table className="pure-table">
+                <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Preço</th>
+                </tr>
+                </thead>
+                <tbody>
+                {
+                    props.lista.map(livro => {
+                        return (
+                            <tr key={livro.id}>
+                            <td>{livro.titulo}</td>
+                            <td>{livro.autor.nome}</td>
+                            <td>{livro.preco}</td>
+                            </tr>
+                        );
+                    })
+                }
+                </tbody>
+            </table> 
+        </div>
+    );
+}
+
 export default class LivroBox extends React.Component {
+    constructor() {
+        super();
+        this.state = {lista: []};
+    }
+    componentDidMount() {
+        $.ajax({
+            url: 'http://localhost:8080/api/livros',
+            dataType: 'json',
+            success: (response) => {
+                this.setState({lista: response});
+            }
+        });
+    }
     render() {
         return (
             <div>
@@ -63,6 +106,7 @@ export default class LivroBox extends React.Component {
                 </div>
                 <div className="content" id="content">
                     <Formulario />
+                    <TabelaLivros lista={this.state.lista}/>
                 </div>
             </div>
         );
