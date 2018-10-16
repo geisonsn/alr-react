@@ -14,10 +14,7 @@ class FormularioAutor extends Component {
           email: '', 
           senha: ''
         };
-        this.enviaForm = this.enviaForm.bind(this);
-        this.setNome = this.setNome.bind(this);
-        this.setEmail = this.setEmail.bind(this);
-        this.setSenha = this.setSenha.bind(this);
+        this.enviaForm = this.enviaForm.bind(this);        
     }
 
     enviaForm(event) {
@@ -40,17 +37,10 @@ class FormularioAutor extends Component {
           }
         });
     }
-
-    setNome(event) {
-    this.setState({nome: event.target.value});
-    }
-
-    setEmail(event) {
-    this.setState({email: event.target.value});
-    }
-
-    setSenha(event) {
-    this.setState({senha: event.target.value});
+    salvaAlteracao(nomeInput, event) {
+        let campo = [];
+        campo[nomeInput] = event.target.value;
+        this.setState(campo);
     }
 
     render() {
@@ -64,7 +54,7 @@ class FormularioAutor extends Component {
                       name="nome" 
                       label="Nome"
                       value={this.state.nome} 
-                      onChange={this.setNome}
+                      onChange={this.salvaAlteracao.bind(this, 'nome')}
                   />
 
                   <InputCustomizado 
@@ -73,7 +63,7 @@ class FormularioAutor extends Component {
                       name="email" 
                       label="Email"
                       value={this.state.email} 
-                      onChange={this.setEmail}
+                      onChange={this.salvaAlteracao.bind(this, 'email')}
                   />
 
                   <InputCustomizado 
@@ -82,7 +72,7 @@ class FormularioAutor extends Component {
                       name="senha" 
                       label="Senha"
                       value={this.state.senha} 
-                      onChange={this.setSenha}
+                      onChange={this.salvaAlteracao.bind(this, 'senha')}
                   />
 
                   <BotaoSubmitCustomizado label="Gravar"/>
